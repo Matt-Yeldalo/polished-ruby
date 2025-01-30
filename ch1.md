@@ -22,3 +22,36 @@ This allows you to use either symbols or strings.
 * Mapping of objects ? Hash
 
 * Large list uniqueness ? Set
+
+## Hashing a database
+
+### Setup
+
+```ruby
+album_infos = 100.times.flat_map do |i|
+    10.times.map do |j|
+        ["Album #{i}", j, "Artist #{j}"]
+    end
+end
+```
+
+### Nested Hash
+
+```ruby
+albums = {}
+album_infos.each do |album, track, artist|
+    ((albums[album] ||= {})[track] ||= []) << artist
+end
+```
+
+### Better Approach
+
+```ruby
+album_artists = {}
+alubum_infos.each do |_, _, artist|
+    album_artists[artist] ||= true
+end
+
+def lookup(artists)
+end
+```
